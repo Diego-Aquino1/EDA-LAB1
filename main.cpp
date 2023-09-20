@@ -8,7 +8,6 @@
 
 using namespace std;
 
-// Estructura para representar un punto en d dimensiones
 struct Point {
     vector<double> coordinates;
 
@@ -17,11 +16,11 @@ struct Point {
     }
 };
 
-// Función para calcular la distancia euclidiana entre dos puntos
 double euclideanDistance(const Point& p1, const Point& p2) {
     double sum = 0.0;
+    double diff;
     for (size_t i = 0; i < p1.coordinates.size(); ++i) {
-        double diff = p1.coordinates[i] - p2.coordinates[i];
+        diff = p1.coordinates[i] - p2.coordinates[i];
         sum += diff * diff;
     }
     return sqrt(sum);
@@ -31,21 +30,20 @@ int main() {
     random_device rd;
     mt19937 gen(rd());
 
-    // Dimensiones requeridas
+    //Dimensiones
     vector<int> dimensions = {10, 50, 100, 500, 1000, 2000, 5000};
 
     for (int d : dimensions) {
         // Genera 100 puntos aleatorios en d dimensiones
         vector<Point> points(100, Point(d));
         uniform_real_distribution<> dis(0.0, 1.0);
-
         for (Point& p : points) {
             for (double& coord : p.coordinates) {
                 coord = dis(gen);
             }
         }
 
-        // Calcula y muestra las distancias entre todos los pares de puntos
+        //Calcula las distancias
         vector<double> distances;
         for (size_t i = 0; i < points.size(); ++i) {
             for (size_t j = i + 1; j < points.size(); ++j) {
@@ -54,7 +52,7 @@ int main() {
             }
         }
 
-        // Exporta las distancias a un archivo de texto
+        //Exporta las distancias
         string filename = "D:/UNSA/4/EDA/EDA-LAB1/distances_" + to_string(d) + ".txt";
         ofstream outFile(filename);
 
@@ -65,7 +63,7 @@ int main() {
             outFile.close();
             cout << "Archivo " << filename << " generado." << endl;
         } else {
-            cerr << "No se pudo abrir el archivo " << filename << " para escritura." << endl;
+            cerr << "No se pudo abrir el archivo " << filename << endl;
         }
     }
     

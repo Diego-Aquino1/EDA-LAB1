@@ -11,7 +11,7 @@ for d in dimensiones:
 
     # Generar un histograma
     plt.hist(distances, bins=20, edgecolor='k')
-    plt.title(f'Histograma de Distancias Euclidianas (Dimensión {d})')
+    plt.title(f'Histograma de Distancias (Dimensión {d})')
     plt.xlabel('Distancia')
     plt.ylabel('Frecuencia')
     plt.grid(True)
